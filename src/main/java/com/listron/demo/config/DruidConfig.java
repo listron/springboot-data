@@ -39,7 +39,7 @@ public class DruidConfig {
 
         //禁止谁访问
 
-        bean.setInitParameters(stringHashMap);
+        //bean.setInitParameters(stringHashMap);
         return bean;
     }
 

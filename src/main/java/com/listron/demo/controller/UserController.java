@@ -2,6 +2,7 @@ package com.listron.demo.controller;
 
 import com.listron.demo.mapper.UserMapper;
 import com.listron.demo.pojo.User;
+import com.listron.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +13,9 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/queryUserList")
     public List<User> queryUserList(){
@@ -24,7 +28,8 @@ public class UserController {
 
     @GetMapping("/addUser")
     public String addUser(){
-        userMapper.addUser(new User(7,"张三三","345678"));
+        //userMapper.addUser(new User(7,"张三三","345678"));
+        userMapper.addUser(new User(7,"张三三","345678",25));
         return "ok";
     }
     @GetMapping("/queryUserById")
@@ -38,5 +43,17 @@ public class UserController {
     public String deleteUser(){
         userMapper.deleteUser(7);
         return "OK";
+    }
+
+    //亿级流量mysql查询接口
+    @GetMapping("/getUserInfo")
+    public User getUserInfo() {
+        User user = userService.findUserInfo();
+        return user;
+    }
+
+    @GetMapping("/getCachedUserInfo")
+    public User getCachedUserInfo() {
+        return userService.getCachedUserInfo();
     }
 }

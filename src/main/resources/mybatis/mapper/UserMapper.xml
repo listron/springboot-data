@@ -22,4 +22,11 @@
     <delete id="deleteUser" parameterType="int">
         delete from user where id=#{id}
     </delete>
+
+<!--    <select id="findUserInfo" resultType="com.roncoo.eshop.inventory.model.User">-->
+<!--	select name,age from user;-->
+<!--  </select>-->
+    <select id="findUserInfo" resultType="User">
+    select name,age from user;
+    </select>
 </mapper>

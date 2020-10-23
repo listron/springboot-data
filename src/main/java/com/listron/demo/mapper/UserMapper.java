@@ -20,4 +20,7 @@ public interface UserMapper {
     int updateUser(User user);
 
     int deleteUser(int id);
+
+    //亿级流量项目用的接口
+    User findUserInfo();
 }
