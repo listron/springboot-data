@@ -1,2 +1,27 @@
-1：第一次提交完成mybatis的搭建，数据库搭建
-2：第二次，搭建redis环境，并且在虚拟机中完成3主、3从的cluster，这部分不是代码，是需要自己提前准备好的工程环境。
+第三次提交：提交内容：
+    第一块，是做实时性比较高的那块数据，比如说库存，销量之类的这种数据，我们采取的实时的缓存+数据库双写的技术方案，双写一致性保障的方案
+    40、41、42、43 这四讲 需要深入看，缓存与数据库不一致问题的优化处理。
+    1、线程池+内存队列初始化
+    @Bean
+    public ServletListenerRegistrationBean servletListenerRegistrationBean(){
+        ServletListenerRegistrationBean servletListenerRegistrationBean = new ServletListenerRegistrationBean();
+        servletListenerRegistrationBean.setListener(new InitListener());
+        return servletListenerRegistrationBean;
+    }
+
+    java web应用，做系统的初始化，一般在哪里做呢？
+
+    ServletContextListener里面做，zx，会跟着整个web应用的启动，就初始化，类似于线程池初始化的构建
+
+    spring boot应用，Application，搞一个listener的注册
+
+    2、两种请求对象封装
+    3、请求异步执行Service封装
+    4、请求处理的工作线程封装
+    5、两种请求Controller接口封装
+    6、读请求去重优化
+    7、空数据读请求过滤优化
+
+第二次提交：第二次，搭建redis环境，并且在虚拟机中完成3主、3从的cluster，这部分不是代码，是需要自己提前准备好的工程环境。
+
+第一次提交：第一次提交完成mybatis的搭建，数据库搭建
