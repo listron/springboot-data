@@ -1,8 +1,10 @@
 package com.listron.demo;
 
+import com.listron.demo.listener.InitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
@@ -33,5 +35,18 @@ public class DemoApplication {
         SpringApplication.run(DemoApplication.class, args);
     }
 
+
+    /**
+     * 注册监听器
+     * @return
+     */
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @Bean
+    public ServletListenerRegistrationBean servletListenerRegistrationBean() {
+        ServletListenerRegistrationBean servletListenerRegistrationBean =
+                new ServletListenerRegistrationBean();
+        servletListenerRegistrationBean.setListener(new InitListener());
+        return servletListenerRegistrationBean;
+    }
 
 }

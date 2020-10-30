@@ -5,7 +5,7 @@ import redis.clients.jedis.JedisCluster;
 
 import javax.annotation.Resource;
 
-@Repository("RedisDao")
+@Repository("redisDao")
 public class RedisDaoImpl implements RedisDao{
 
     @Resource
@@ -18,5 +18,10 @@ public class RedisDaoImpl implements RedisDao{
     @Override
     public String get(String key) {
         return jedisCluster.get(key);
+    }
+
+    @Override
+    public void delete(String key) {
+        jedisCluster.del(key);
     }
 }

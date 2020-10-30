@@ -1,15 +1,16 @@
-package com.listron.demo.service;
+package com.listron.demo.service.Impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.listron.demo.dao.RedisDao;
 import com.listron.demo.mapper.UserMapper;
 import com.listron.demo.pojo.User;
+import com.listron.demo.service.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
 @Service("userService")
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
 
     @Resource
