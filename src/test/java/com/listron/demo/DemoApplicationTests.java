@@ -14,7 +14,7 @@ import java.sql.SQLException;
 @SpringBootTest
 public class DemoApplicationTests {
 
-    @Autowired
+    /*@Autowired
     DataSource dataSource;
     @Test
     public void contextLoads() throws SQLException {
@@ -27,6 +27,6 @@ public class DemoApplicationTests {
 
         //关闭
         connection.close();
-    }
+    }*/
 
 }

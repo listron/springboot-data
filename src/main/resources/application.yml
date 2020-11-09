@@ -1,20 +1,27 @@
 spring:
   datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://10.10.34.18:3306/eshop?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: eshop
-    password: eshop
-    #DRUID 专用配置
-    druid:
-      initialSize: 5
-      minIdle: 5
-      maxActice: 20
-      maxWait: 60000
-      timeBetweenEvictionRunsMillis: 60000
+#    type: com.alibaba.druid.pool.DruidDataSource
+#    url: jdbc:mysql://10.10.34.18:3306/eshop?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    username: eshop
+#    password: eshop
+#    #DRUID 专用配置
+#    druid:
+#      initialSize: 5
+#      minIdle: 5
+#      maxActice: 20
+#      maxWait: 60000
+#      timeBetweenEvictionRunsMillis: 60000
 
       #配置监控统计拦截器filters,stat 监控统计 log4j 日志记录 wall 防御sql注入
       #filters: stat,wall,log4j
       #maxPoolPreparedStatementPerConnectionSize: 30
       #useGlobalDataSourceStat: true
       #connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+    cache:
+      #ehcache配置文件路径
+      ehcache:
+      config: classpath:/ehcache/ehcache.xml
+        #指定缓存类型，可加可不加
+        #type: ehcache

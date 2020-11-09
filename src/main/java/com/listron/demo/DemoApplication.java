@@ -1,32 +1,30 @@
 package com.listron.demo;
 
-import com.listron.demo.listener.InitListener;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.listron.demo.cache.listener.InitListener;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.JedisCluster;
 
 import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
-
-@SpringBootApplication
+@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
+@EnableCaching
+//@EnableAutoConfiguration
 public class DemoApplication {
 
     @Bean
     public JedisCluster JedisClusterFactory() {
         Set<HostAndPort> jedisClusterNodes = new HashSet<HostAndPort>();
         jedisClusterNodes.add(new HostAndPort("10.10.34.104", 7002));
-        jedisClusterNodes.add(new HostAndPort("10.10.34.100", 7003));
-        jedisClusterNodes.add(new HostAndPort("10.10.34.113", 7005));
+        jedisClusterNodes.add(new HostAndPort("10.10.33.140", 7003));
+        jedisClusterNodes.add(new HostAndPort("10.10.33.140", 7004));
         JedisCluster jedisCluster = new JedisCluster(jedisClusterNodes);
         return jedisCluster;
     }
@@ -45,6 +43,9 @@ public class DemoApplication {
     public ServletListenerRegistrationBean servletListenerRegistrationBean() {
         ServletListenerRegistrationBean servletListenerRegistrationBean =
                 new ServletListenerRegistrationBean();
+        //数据库与redis双写不一致的项目实现，inventory中InitListener
+        //servletListenerRegistrationBean.setListener(new InitListener());
+        //cache中的InitListener
         servletListenerRegistrationBean.setListener(new InitListener());
         return servletListenerRegistrationBean;
     }

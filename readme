@@ -1,6 +1,17 @@
+第四次提交：大概是从46-60讲的介绍和手动搭建架构，其中虚拟机的ecache、zookeeper、kafka、nginx、lua等操作也都搭建完成。
+  工程目录是com.listron.demo.cache下面所有内容，此包是多级缓存架构的框架。
+  1：将非实时性的三层缓存架构完成。
+  2：包括nginx分发层、应用层的lua脚本实现。
+  3：kafka的三节点搭建 一主，二从
+  3：java层的kafka监听实现，底层商品服务发送变更数据到kafka，缓存服务监听到，保存到redis和本地ecache中。
+  4：从nginx的请求，一直到java层的请求数据后，设置到redis、ecache、和本地的nginx缓存中。
+  框架庞大，需要与之前强实时性的数据库与redis缓存的双写，同时保持一致性区分开，这是两套缓存架构。
+
+
 第三次提交：提交内容：
     第一块，是做实时性比较高的那块数据，比如说库存，销量之类的这种数据，我们采取的实时的缓存+数据库双写的技术方案，双写一致性保障的方案
     40、41、42、43 这四讲 需要深入看，缓存与数据库不一致问题的优化处理。
+    工程是com.listron.demo.inventory下的商品详情页库存强实时性数据框架。
     1、线程池+内存队列初始化
     @Bean
     public ServletListenerRegistrationBean servletListenerRegistrationBean(){
